@@ -63,7 +63,7 @@ const PricingPlans = () => {
     try {
       // Make API call to backend to create Stripe checkout session
      // const response = await fetch('http://localhost:4242/create-checkout-session', {
-      const response = await fetch('https://smart-energy-web-klrs.vercel.app/create-checkout-session', {
+      const response = await fetch('https://smartenergywebservice.onrender.com/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ priceId }),
