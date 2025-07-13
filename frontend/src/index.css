@@ -1,0 +1,51 @@
+/**
+ * Global CSS Styles for SmartEnergyWeb Application
+ * 
+ * This file contains global styles and Tailwind CSS imports.
+ * Tailwind CSS is used for utility-first styling throughout the application.
+ * 
+ * CSS Structure:
+ * - Tailwind CSS imports (base, components, utilities)
+ * - Global font family configuration
+ * - Font smoothing and rendering optimizations
+ * - Code font configuration for any code elements
+ */
+
+/* Tailwind CSS Imports */
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind base;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind utilities;
+
+/**
+ * Global Body Styles
+ * 
+ * Sets up the base styling for the entire application:
+ * - Removes default margins
+ * - Configures system font stack for optimal readability
+ * - Enables font smoothing for crisp text rendering
+ * - Optimizes rendering for different operating systems
+ */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Code Element Styles
+ * 
+ * Configures monospace font for code elements:
+ * - Used for any inline code or code blocks
+ * - Ensures consistent code formatting
+ * - Provides good readability for technical content
+ */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} 
