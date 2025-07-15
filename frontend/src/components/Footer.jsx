@@ -1,13 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Footer Component
+ * 
+ * Site footer with navigation links, contact information, and social media.
+ * Uses environment variables for contact details and social media URLs.
+ * 
+ * Features:
+ * - Company information and description
+ * - Quick navigation links
+ * - Social media links
+ * - Contact information
+ * - Back to top functionality
+ * 
+ * @returns {JSX.Element} Site footer
+ */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  /**
+   * Handles "Back to Top" button click
+   * Smoothly scrolls to the top of the page
+   */
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  /**
+   * Handles section navigation
+   * Smoothly scrolls to specified section
+   * 
+   * @param {string} sectionId - ID of the section to scroll to
+   */
   const handleScrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -15,18 +40,43 @@ const Footer = () => {
     }
   };
 
+  /**
+   * Social media configuration
+   * Uses environment variables for URLs with fallbacks
+   */
   const socialIcons = [
-    { name: 'Facebook', icon: '📘', url: 'https://facebook.com/smartenergy' },
-    { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/smartenergy' },
-    { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/company/smartenergy' },
-    { name: 'Instagram', icon: '📷', url: 'https://instagram.com/smartenergy' },
-    { name: 'YouTube', icon: '📺', url: 'https://youtube.com/smartenergy' }
+    { 
+      name: 'Facebook', 
+      icon: '📘', 
+      url: import.meta.env.VITE_FACEBOOK_URL || 'https://facebook.com/smartenergy' 
+    },
+    { 
+      name: 'Twitter', 
+      icon: '🐦', 
+      url: import.meta.env.VITE_TWITTER_URL || 'https://twitter.com/smartenergy' 
+    },
+    { 
+      name: 'LinkedIn', 
+      icon: '💼', 
+      url: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/company/smartenergy' 
+    },
+    { 
+      name: 'Instagram', 
+      icon: '📷', 
+      url: import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/smartenergy' 
+    },
+    { 
+      name: 'YouTube', 
+      icon: '📺', 
+      url: import.meta.env.VITE_YOUTUBE_URL || 'https://youtube.com/smartenergy' 
+    }
   ];
 
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="mb-6">
@@ -45,10 +95,10 @@ const Footer = () => {
               <div className="flex items-center gap-2 text-gray-300">
                 <span>📧</span>
                 <a 
-                  href="mailto:support@smartenergy.com" 
+                  href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com'}`}
                   className="hover:text-green-400 transition-colors duration-200"
                 >
-                  support@smartenergy.com
+                  {import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com'}
                 </a>
               </div>
             </div>

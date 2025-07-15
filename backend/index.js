@@ -2,6 +2,13 @@
 import express from 'express';
 import Stripe from 'stripe';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+/**
+ * Load environment variables
+ * Loads variables from .env file into process.env
+ */
+dotenv.config();
 
 /**
  * Express Server Configuration
@@ -14,18 +21,22 @@ import cors from 'cors';
  * Environment Variables Required:
  * - STRIPE_SECRET_KEY: Your Stripe secret key (test or live)
  * - FRONTEND_URL: URL of your frontend application
+ * - PORT: Server port (default: 4242)
+ * - CORS_ORIGIN: Allowed CORS origin
  */
 
 // Initialize Express app
 const app = express();
 
-// Initialize Stripe with your secret key
-// Replace with your actual Stripe secret key from dashboard
-const stripe = new Stripe('sk_test_51Rc9052UXiuJnTqdvAzSekXjATshU9GZdWPlGacqjVPOr8I0k1tOv9SicXqRyRXDjzhQ2POONjCswLbc9X0Uzk3m00bLsa5g2I');
+// Initialize Stripe with environment variable
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_51Rc9052UXiuJnTqdvAzSekXjATshU9GZdWPlGacqjVPOr8I0k1tOv9SicXqRyRXDjzhQ2POONjCswLbc9X0Uzk3m00bLsa5g2I');
 
 // Middleware Configuration
-// Enable CORS for frontend communication
-app.use(cors());
+// Enable CORS for frontend communication with environment variable
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  credentials: true
+}));
 
 // Parse JSON request bodies
 app.use(express.json());
@@ -53,7 +64,7 @@ app.post('/create-checkout-session', async (req, res) => {
         // Handle free plan - redirect directly to success page
         if (priceId === 'price_free') {
             return res.json({ 
-                url: 'http://localhost:5173/success',
+                url: process.env.FRONTEND_SUCCESS_URL || 'http://localhost:5173/success',
                 message: 'Free plan activated'
             });
         }
@@ -72,9 +83,9 @@ app.post('/create-checkout-session', async (req, res) => {
                 quantity: 1       // One subscription
             }],
             
-            // URLs to redirect after payment completion
-            success_url: 'http://localhost:5173/success',
-            cancel_url: 'http://localhost:5173/cancel',
+            // URLs to redirect after payment completion (from environment variables)
+            success_url: process.env.FRONTEND_SUCCESS_URL || 'http://localhost:5173/success',
+            cancel_url: process.env.FRONTEND_CANCEL_URL || 'http://localhost:5173/cancel',
         });
         
         // Return the checkout URL to frontend
@@ -93,10 +104,26 @@ app.post('/create-checkout-session', async (req, res) => {
 });
 
 /**
+ * Health check endpoint
+ * Used to verify server is running
+ */
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'OK', 
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'development'
+    });
+});
+
+/**
  * Start the Express server
  * 
- * Server runs on port 4242 by default.
+ * Server runs on port from environment variable or defaults to 4242.
  * In production, use environment variable PORT.
  */
 const PORT = process.env.PORT || 4242;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`CORS Origin: ${process.env.CORS_ORIGIN || 'http://localhost:5173'}`);
+});

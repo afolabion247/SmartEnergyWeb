@@ -72,8 +72,11 @@ const SupportPage = () => {
       // Simulate API call delay (replace with actual backend integration)
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Get support email from environment variable
+      const supportEmail = import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com';
+      
       // Create mailto link with form data
-      const mailtoLink = `mailto:support@smartenergy.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      const mailtoLink = `mailto:${supportEmail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\nPriority: ${formData.priority}\n\nMessage:\n${formData.message}`
       )}`;
       
@@ -106,16 +109,22 @@ const SupportPage = () => {
       icon: '📧',
       title: 'Email Support',
       description: 'Get help via email',
-      contact: 'support@smartenergy.com',
-      action: () => window.location.href = 'mailto:support@smartenergy.com',
+      contact: import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com',
+      action: () => {
+        const email = import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com';
+        window.location.href = `mailto:${email}`;
+      },
       color: 'bg-blue-500'
     },
     {
       icon: '📞',
       title: 'Phone Support',
       description: 'Call us directly',
-      contact: '+1 (555) 123-4567',
-      action: () => window.location.href = 'tel:+15551234567',
+      contact: import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567',
+      action: () => {
+        const phone = import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567';
+        window.location.href = `tel:${phone}`;
+      },
       color: 'bg-green-500'
     },
     {
@@ -123,15 +132,21 @@ const SupportPage = () => {
       title: 'Live Chat',
       description: 'Chat with our team',
       contact: 'Available 24/7',
-      action: () => window.open('https://tawk.to/chat/smartenergy', '_blank'),
+      action: () => {
+        const chatUrl = import.meta.env.VITE_LIVE_CHAT_URL || 'https://tawk.to/chat/smartenergy';
+        window.open(chatUrl, '_blank');
+      },
       color: 'bg-purple-500'
     },
     {
       icon: '📱',
       title: 'WhatsApp',
       description: 'Message us on WhatsApp',
-      contact: '+1 (555) 123-4567',
-      action: () => window.open('https://wa.me/15551234567', '_blank'),
+      contact: import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567',
+      action: () => {
+        const whatsappUrl = import.meta.env.VITE_WHATSAPP_URL || 'https://wa.me/15551234567';
+        window.open(whatsappUrl, '_blank');
+      },
       color: 'bg-green-600'
     }
   ];
@@ -283,7 +298,7 @@ const SupportPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>

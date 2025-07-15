@@ -61,9 +61,11 @@ const PricingPlans = () => {
    */
   const handleSubscribe = async (priceId) => {
     try {
+      // Get API URL from environment variable or use default
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4242';
+      
       // Make API call to backend to create Stripe checkout session
-     // const response = await fetch('http://localhost:4242/create-checkout-session', {
-      const response = await fetch('https://smartenergywebservice.onrender.com/create-checkout-session', {
+      const response = await fetch(`${apiUrl}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ priceId }),
