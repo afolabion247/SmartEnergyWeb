@@ -88,6 +88,7 @@ const PricingPlans = () => {
       }
     } catch (error) {
       console.error('Error creating checkout session:', error);
+      alert('Error creating checkout session:', error + ' with the URL ' + apiUrl);
       alert('Error: Unable to connect to payment server. Please try again.');
     }
   };
