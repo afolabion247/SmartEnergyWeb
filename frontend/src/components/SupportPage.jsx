@@ -72,8 +72,8 @@ const SupportPage = () => {
       // Simulate API call delay (replace with actual backend integration)
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Get support email from environment variable
-      const supportEmail = import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com';
+      // Use hardcoded support email
+      const supportEmail = 'support@smartenergy.com';
       
       // Create mailto link with form data
       const mailtoLink = `mailto:${supportEmail}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
@@ -109,10 +109,9 @@ const SupportPage = () => {
       icon: '📧',
       title: 'Email Support',
       description: 'Get help via email',
-      contact: import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com',
+      contact: 'support@smartenergy.com',
       action: () => {
-        const email = import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com';
-        window.location.href = `mailto:${email}`;
+        window.location.href = 'mailto:support@smartenergy.com';
       },
       color: 'bg-blue-500'
     },
@@ -120,10 +119,9 @@ const SupportPage = () => {
       icon: '📞',
       title: 'Phone Support',
       description: 'Call us directly',
-      contact: import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567',
+      contact: '+1 (555) 123-4567',
       action: () => {
-        const phone = import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567';
-        window.location.href = `tel:${phone}`;
+        window.location.href = 'tel:+15551234567';
       },
       color: 'bg-green-500'
     },
@@ -133,8 +131,7 @@ const SupportPage = () => {
       description: 'Chat with our team',
       contact: 'Available 24/7',
       action: () => {
-        const chatUrl = import.meta.env.VITE_LIVE_CHAT_URL || 'https://tawk.to/chat/smartenergy';
-        window.open(chatUrl, '_blank');
+        window.open('https://tawk.to/chat/smartenergy', '_blank');
       },
       color: 'bg-purple-500'
     },
@@ -142,10 +139,9 @@ const SupportPage = () => {
       icon: '📱',
       title: 'WhatsApp',
       description: 'Message us on WhatsApp',
-      contact: import.meta.env.VITE_SUPPORT_PHONE || '+1 (555) 123-4567',
+      contact: '+1 (555) 123-4567',
       action: () => {
-        const whatsappUrl = import.meta.env.VITE_WHATSAPP_URL || 'https://wa.me/15551234567';
-        window.open(whatsappUrl, '_blank');
+        window.open('https://wa.me/15551234567', '_blank');
       },
       color: 'bg-green-600'
     }

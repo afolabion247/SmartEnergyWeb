@@ -45,31 +45,11 @@ const Footer = () => {
    * Uses environment variables for URLs with fallbacks
    */
   const socialIcons = [
-    { 
-      name: 'Facebook', 
-      icon: '📘', 
-      url: import.meta.env.VITE_FACEBOOK_URL || 'https://facebook.com/smartenergy' 
-    },
-    { 
-      name: 'Twitter', 
-      icon: '🐦', 
-      url: import.meta.env.VITE_TWITTER_URL || 'https://twitter.com/smartenergy' 
-    },
-    { 
-      name: 'LinkedIn', 
-      icon: '💼', 
-      url: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/company/smartenergy' 
-    },
-    { 
-      name: 'Instagram', 
-      icon: '📷', 
-      url: import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com/smartenergy' 
-    },
-    { 
-      name: 'YouTube', 
-      icon: '📺', 
-      url: import.meta.env.VITE_YOUTUBE_URL || 'https://youtube.com/smartenergy' 
-    }
+    { name: 'Facebook', icon: '📘', url: 'https://facebook.com/smartenergy' },
+    { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/smartenergy' },
+    { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/company/smartenergy' },
+    { name: 'Instagram', icon: '📷', url: 'https://instagram.com/smartenergy' },
+    { name: 'YouTube', icon: '📺', url: 'https://youtube.com/smartenergy' }
   ];
 
   return (
@@ -95,10 +75,10 @@ const Footer = () => {
               <div className="flex items-center gap-2 text-gray-300">
                 <span>📧</span>
                 <a 
-                  href={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com'}`}
+                  href={'mailto:support@smartenergy.com'}
                   className="hover:text-green-400 transition-colors duration-200"
                 >
-                  {import.meta.env.VITE_SUPPORT_EMAIL || 'support@smartenergy.com'}
+                  {'support@smartenergy.com'}
                 </a>
               </div>
             </div>
