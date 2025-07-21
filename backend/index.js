@@ -72,8 +72,11 @@ app.post('/create-checkout-session', async (req, res) => {
             }],
             
             // URLs to redirect after payment completion (hardcoded)
-            success_url: 'http://localhost:5173/success',
-            cancel_url: 'http://localhost:5173/cancel',
+           // success_url: 'http://localhost:5173/success',
+           // cancel_url: 'http://localhost:5173/cancel',
+
+            success_url: 'https://smartenergyweb.vercel.app/success',
+            cancel_url: 'https://smartenergyweb.vercel.app/cancel',
         });
         
         // Return the checkout URL to frontend
