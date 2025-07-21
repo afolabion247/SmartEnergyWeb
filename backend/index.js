@@ -33,10 +33,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_51Rc9052UXiu
 
 // Middleware Configuration
 // Enable CORS for frontend communication with environment variable
-app.use(cors({
+app.use(cors());
+/* app.use(cors({
   origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
   credentials: true
-}));
+})); */
 
 // Parse JSON request bodies
 app.use(express.json());
