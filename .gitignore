@@ -1,3 +1,9 @@
+# Ignore backend environment variables
+backend/.env
+
+# Ignore frontend environment variables
+frontend/.env.local
+
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -10,6 +16,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
 
 # Build outputs
 dist/
